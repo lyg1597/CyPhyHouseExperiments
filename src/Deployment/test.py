@@ -32,20 +32,27 @@ def talker( topic_list, topic_type_list, device_name ):
 
     os.environ['ROS_MASTER_URI'] = "http://localhost:11311"
     
-
+    rospy.init_node(device_name, anonymous=True)
+    pub_list = []
     for i in range( len(topic_list) ):
         topic_type = topic_type_list[i]
         topic      = '/' + device_name + '/' + topic_list[i][1] 
         data_queue = topic_list[i][0] 
-        
 
-        thread = threading.Thread( target = little_talker, args = ( data_queue, topic, topic_type, device_name,) )
-        thread.run()
+        pub_list.append( rospy.Publisher(topic, topic_type, queue_size = 10 ) )
+
+    while not rospy.is_shutdown():
+	print("publishing ---")
+	for i in range(len(pub_list)):
+	    data = topic_list[i][0].get()
+	    pub_list[i].publish(data)
+
+
 
 def little_talker(data_queue, topic, topic_type, device_name):
-    rospy.init_node(device_name, anonymous=True)
+    
     pub = rospy.Publisher(topic, topic_type, queue_size = 10 )
-    print("-------------creating publisher -------------------")
+    
     while not rospy.is_shutdown():
         # print("puted data to ", topic)
         data = data_queue.get()
