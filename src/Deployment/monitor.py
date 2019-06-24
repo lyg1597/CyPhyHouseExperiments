@@ -37,10 +37,12 @@ def talker( topic_list, topic_type_list, device_name ):
     for i in range( len(topic_list) ):
         topic_type = topic_type_list[i]
         topic      = '/' + device_name + '/' + topic_list[i][1] 
-        pub_list.append( rospy.Publisher(topic, topic_type, queue_size = 10 ) 
+
+        pub_list.append( rospy.Publisher(topic, topic_type, queue_size = 10 ) )
 
     while not rospy.is_shutdown():
-        for i in range( len(pub_list) ):
+        print("publishing ---")
+        for i in range(len(pub_list)):
             data = topic_list[i][0].get()
             pub_list[i].publish(data)
 
