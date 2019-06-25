@@ -1,6 +1,7 @@
 import socket, time, threading, os, multiprocessing,rospy
 from collections import OrderedDict 
 from std_msgs.msg import String
+from geometry_msgs.msg import Point, Twist
 
 def update_device ( device_list ):
     '''
@@ -51,7 +52,7 @@ def callback(data, args):
     if( not args[0].full() ):
         args[0].put( data )
 
-def listener( address, topic_list ):
+def listener( address, topic_list, topic_type_list ):
     # subscribe from remote master
     '''
     topic_list = 
@@ -63,9 +64,12 @@ def listener( address, topic_list ):
     os.environ['ROS_MASTER_URI'] = "http://" + address + ":11311"
     rospy.init_node('listener', anonymous=True)
 
-    for topic in topic_list:
+    for i in range( len(topic_list) ):
+        topic      = topic_list[i]
+        topic_type = topic_type_list[i]
+
         rospy.Subscriber(name = topic[1], 
-                         data_class =  String, 
+                         data_class =  topic_type, 
                          callback = callback, 
                          callback_args = (topic[0], address)
                         )
@@ -90,11 +94,11 @@ os.environ['ROS_MASTER_URI'] = "http://localhost:11311"
 
 
 
-topic_list      = [ "chatter0", "chatter1", "chatter2"] 
-topic_type_list = [ String    , String    , String    ]
+topic_list      = [ "chatter0", "chatter1", "chatter2", "drive_cmd"] 
+topic_type_list = [ String    , String    , String    , Twist]
 
 data_queue_list = [ [(name, address), [ (multiprocessing.Queue(), topic_name) for topic_name in topic_list ] ]   for name, address in device_list.items() ]
-sub_process_list = [ multiprocessing.Process(target = listener, args = ( iterm[0][1], iterm[1], ) ) for iterm in data_queue_list ]
+sub_process_list = [ multiprocessing.Process(target = listener, args = ( iterm[0][1], iterm[1], topic_type_list,) ) for iterm in data_queue_list ]
 pub_process_list = [ multiprocessing.Process(target = talker, args = (  iterm[1], topic_type_list, iterm[0][0],))  for iterm in  data_queue_list]
 
 for process in sub_process_list :
