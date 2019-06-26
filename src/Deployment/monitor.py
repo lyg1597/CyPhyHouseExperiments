@@ -1,7 +1,7 @@
 import socket, time, threading, os, multiprocessing,rospy
 from collections import OrderedDict 
 from std_msgs.msg import String
-from geometry_msgs.msg import Point, Twist
+from geometry_msgs.msg import Point, Twist, PoseStamped
 
 def update_device ( device_list ):
     '''
@@ -94,8 +94,8 @@ os.environ['ROS_MASTER_URI'] = "http://localhost:11311"
 
 
 
-topic_list      = [ "chatter0", "chatter1", "chatter2", "drive_cmd"] 
-topic_type_list = [ String    , String    , String    , Twist]
+topic_list      = [ "vrpn_client_ros/hotdec_car/pose"] 
+topic_type_list = [ PoseStamped]
 
 data_queue_list = [ [(name, address), [ (multiprocessing.Queue(), topic_name) for topic_name in topic_list ] ]   for name, address in device_list.items() ]
 sub_process_list = [ multiprocessing.Process(target = listener, args = ( iterm[0][1], iterm[1], topic_type_list,) ) for iterm in data_queue_list ]
