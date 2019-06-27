@@ -81,7 +81,7 @@ def listener( address, topic_list, topic_type_list ):
 
 # -----------------------------------------------------------------------------------
 
-topic = "chatter"
+
 
 device_list = {}
 update_device(device_list)

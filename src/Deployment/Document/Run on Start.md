@@ -10,7 +10,7 @@
 
   Scroll to the bottom and add the following line (after all the `#'s`):
 
-  `@reboot python /bin/your_script.py &`
+  `@reboot python3 /bin/device.py &`
 
   The “&” at the end of the line means the command is run in the background and it won’t stop the system booting up.
 
