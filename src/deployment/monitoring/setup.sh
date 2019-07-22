@@ -5,4 +5,4 @@ export ROS_MASTER_URI=http://\${IP}:11311
 
 echo \$ROS_IP
 echo \$ROS_MASTER_URI
-"  >> ~/test
+"  >> ~/.bashrc
