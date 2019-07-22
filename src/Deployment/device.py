@@ -74,7 +74,7 @@ def excute_program ( command: str ):  # no returns
     FUNCATIONALIATY - This function handles command execution, the command will execute on /tmp directory
     '''
     print("[EXC]: Excuting command ", command)
-    os.run(command)
+    os.system(command)
     # if(len(command.split()) != 0  ):
     #     command = command.split("&&")
     #     for arg in command:
