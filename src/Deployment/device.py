@@ -81,8 +81,8 @@ def excute_program ( command: str ):  # no returns
     #         result = subprocess.run(arg.split(), cwd= ( str(os.environ.get('HOME')) + "/tmp" ) , stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     #         print (result.stdout)
     #         print("[EXC]: excute return code",result.returncode)
-    else:
-        print("[EXC]: empty command")
+    # else:
+    #     print("[EXC]: empty command")
 
 
 def connection_handler(controller_sock: socket, address: tuple): # no returns 
