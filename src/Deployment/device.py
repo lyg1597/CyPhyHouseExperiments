@@ -74,12 +74,13 @@ def excute_program ( command: str ):  # no returns
     FUNCATIONALIATY - This function handles command execution, the command will execute on /tmp directory
     '''
     print("[EXC]: Excuting command ", command)
-    if(len(command.split()) != 0  ):
-        command = command.split("&&")
-        for arg in command:
-            result = subprocess.run(arg.split(), cwd= ( str(os.environ.get('HOME')) + "/tmp" ) , stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            print (result.stdout)
-            print("[EXC]: excute return code",result.returncode)
+    os.run(command)
+    # if(len(command.split()) != 0  ):
+    #     command = command.split("&&")
+    #     for arg in command:
+    #         result = subprocess.run(arg.split(), cwd= ( str(os.environ.get('HOME')) + "/tmp" ) , stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    #         print (result.stdout)
+    #         print("[EXC]: excute return code",result.returncode)
     else:
         print("[EXC]: empty command")
 

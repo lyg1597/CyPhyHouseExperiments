@@ -126,16 +126,16 @@ for index, attributes in device_list.items():
 print(" -------------------------------------------------------------\n")
 
 # Step 2 : Removing existing git repo
-command = "rm -rf CyPyHous3"
-execute_multi_command(command, device_list, 1)
+# command = "rm -rf CyPyHous3"
+# execute_multi_command(command, device_list, 1)
 
 # Step 3 : Git cloning 
-command = "git clone -b " + args["branch"] + ' '+args["url"]
-execute_multi_command(command, device_list, 0)
-print("[INFO]: Git clone finished")
+# command = "git clone -b " + args["branch"] + ' '+args["url"]
+# execute_multi_command(command, device_list, 0)
+# print("[INFO]: Git clone finished")
 
 # Step 4 : Starting Program
-command = "cat " + args["startfile"]
+command = "bash ~/flydrone.bash"
 execute_multi_command(command, device_list, 1)
 print("[INFO]: Execute finished")
 
