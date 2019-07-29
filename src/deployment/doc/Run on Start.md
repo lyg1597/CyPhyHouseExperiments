@@ -1,24 +1,23 @@
 # Run on Start
 
-- Copy the python file to /bin:
+- Copy the python file to `~/.local/bin` and make it executable:
 
-  `sudo cp -i /path/to/your_script.py /bin`
+  ```
+  cp -i /path/to/device.py $HOME/.local/bin
+  chmod u+x $HOME/.local/bin/device.py
+  ```
 
 - Add A New Cron Job:
 
-  `sudo crontab -e`
+  `crontab -e`
 
   Scroll to the bottom and add the following line (after all the `#'s`):
 
-  `@reboot python3 /bin/device.py &`
+  `@reboot $HOME/.local/bin/device.py &`
 
-  The “&” at the end of the line means the command is run in the background and it won’t stop the system booting up.
+  The "&" at the end of the line means the command is run in the background and it won't stop the system booting up.
 
 - Test it:
 
   `sudo reboot`
-
-
-
-
 
