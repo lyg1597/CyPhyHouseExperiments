@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 '''
 DANGER: This code contains multiple security loopholes, running in a privatized network is recommanded 
 '''
@@ -18,9 +20,8 @@ def device_query_handler( address: tuple, device_name: str ):  # no returns
     '''
     status = "some_status"
     msg = bytes( device_name + ' ' + status ,"utf-8" )
-    s = socket.socket( socket.AF_INET, socket.SOCK_DGRAM ) 
-    s.sendto( msg, address )
-    s.close()
+    with socket.socket( socket.AF_INET, socket.SOCK_DGRAM ) as s:
+        s.sendto( msg, address )
 
 def device_quey_listener(device_name: str):  # no returns
     '''
@@ -32,18 +33,19 @@ def device_quey_listener(device_name: str):  # no returns
 
     # Preparing socket 
     port = 60651  
-    buffer_size = 64 
-    discover_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    discover_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-    discover_socket.bind(('0.0.0.0', port))
+    buffer_size = 64
 
-    # Listening
-    while True:
-        instruction, address = discover_socket.recvfrom(buffer_size)
-        # print( "[DISCOVER]", instruction, " from " , address )
-        if( instruction.decode("utf-8") == "INFO" ):
-            udp_response = threading.Thread( target=device_query_handler, args=(address, device_name, ) )
-            udp_response.start()
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as discover_socket:
+        discover_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        discover_socket.bind(('0.0.0.0', port))
+ 
+        # Listening
+        while True:
+            instruction, address = discover_socket.recvfrom(buffer_size)
+            # print( "[DISCOVER]", instruction, " from " , address )
+            if( instruction.decode("utf-8") == "INFO" ):
+                udp_response = threading.Thread( target=device_query_handler, args=(address, device_name, ) )
+                udp_response.start()
         
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -54,6 +56,6 @@ if os.path.exists(tmp_path):
     shutil.rmtree(tmp_path)
 os.makedirs(tmp_path)
 
-device_name = "some_device"
-listening_discover         = Process(target=device_quey_listener,args=(device_name, ))
+device_name = socet.gethostname()
+listening_discover = Process(target=device_quey_listener,args=(device_name, ))
 listening_discover.start()
