@@ -56,6 +56,6 @@ if os.path.exists(tmp_path):
     shutil.rmtree(tmp_path)
 os.makedirs(tmp_path)
 
-device_name = socet.gethostname()
+device_name = socket.gethostname()
 listening_discover = Process(target=device_quey_listener,args=(device_name, ))
 listening_discover.start()
