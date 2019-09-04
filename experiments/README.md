@@ -33,3 +33,16 @@ This command requires higher permission to run the command.
 In our server, we create a group `wireshark` for students to run this
 experiment.
 
+# Experiment Log Files
+
+For each experiment configuration,
+
++ Configuaration info
+
+  - app name, number of devices, device types
+  - (Optional) path planner
+
++ ROS topics statistics log
++ Gazebo real time factor history log
++ CPU and memory usage history log
++ tshark log
