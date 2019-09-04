@@ -40,6 +40,7 @@ For each experiment configuration,
 + Configuaration info
 
   - app name, number of devices, device types
+  - intial position of each device
   - (Optional) path planner
 
 + ROS topics statistics log
