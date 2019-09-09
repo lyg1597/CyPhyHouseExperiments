@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function finish
+{
+  kill -9 $GZ_PID
+  kill -9 $nodeStat_PID
+  kill -9 $tshark_PID
+  kill -9 $ROS_PID
+}
+trap finish SIGINT SIGTERM
+
+launchPath=$HOME/catkin_ws3/src/Cymulator/cym_device/launch/
+launchFile=$1
+appName=$2
+
+if [ -f $launchPath$launchFile ]; then
+   echo $launchFile
+else
+  echo file not found
+  exit 1
+fi
+
+
+roslaunch cym_device $launchFile &>/dev/null &
+ROS_PID=$!
+sleep 5s
+echo Simulator Launched!
+
+echo Collecting Data!
+gz stats > $appName_stats/RTstats.txt &
+GZ_PID=$!
+python3 $appName_stats/nodeStats.py &
+nodeStat_PID=$!
+tshark -f "udp portrange 2000-2016" > $appName_stats/packetStats.txt &
+tshark_PID=$!
+
+sleep 3s
+echo Ctrl-C to end data collection.
+
+
+wait
