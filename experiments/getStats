@@ -29,12 +29,12 @@ echo "Start Collecting Data!"
 
 function finish
 {
-  kill -9 $GZ_PID
-  kill -9 $nodeStat_PID
-  kill -9 $tshark_PID
+  kill -INT $GZ_PID
+  kill -TERM $nodeStat_PID
+  kill -INT $tshark_PID
 }
 trap finish EXIT
 
 echo "Press Ctrl-C to end user application and data collection"
-timeout -s INT 120s python3 $1
+timeout --foreground -s INT 120s python3 $1
 
