@@ -1,0 +1,2 @@
+Configuration,Max RT Factor,Min RT Factor,Mean RT Factor,N.O. Packets/s,Mean CPU Percent,Mean N.O. Threads,Mean Memory Percent
+test_lineform_6_drones,0.99,0.82,0.9710543130990497,65.02238431165465,42.458688077564,44,0.19943901712983905
