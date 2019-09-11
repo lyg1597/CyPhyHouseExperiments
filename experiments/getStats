@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TIMEOUT="120s"
+
 appName=$1
 appName_stats="stats/${appName}.stats"
 
@@ -36,5 +38,5 @@ function finish
 trap finish EXIT
 
 echo "Press Ctrl-C to end user application and data collection"
-timeout --foreground -s INT 120s python3 $1
+timeout --foreground -s INT $TIMEOUT python3 $1
 
