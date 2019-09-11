@@ -5,6 +5,8 @@ if __name__ == '__main__':
 
     testNode = NodeInfo()
     statFile = open(sys.argv[1], 'w')
+    header = ', '.join(["node","cpu_percent","num_threads","mem_percent"])
+    statFile.write(header+'\n')
 
     while(True):
         nodes = testNode.get_all_node_fields( ['pid', 'get_cpu_percent', 'get_memory_percent', 'get_num_threads'])
