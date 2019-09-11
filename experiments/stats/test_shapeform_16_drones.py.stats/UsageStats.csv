@@ -1,3 +1,4 @@
+node,cpu_percent,num_threads,mem_percent
 /drone5/waypoint_node, 0.0, 10, 0.08464308524906677
 /gazebo, 0.0, 274, 0.6851883579229162
 /drone0/waypoint_node, 0.0, 10, 0.08432330608363874

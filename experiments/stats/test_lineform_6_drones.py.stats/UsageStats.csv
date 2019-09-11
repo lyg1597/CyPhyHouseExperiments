@@ -1,3 +1,4 @@
+node,cpu_percent,num_threads,mem_percent
 /gazebo, 0.0, 194, 0.5654556588674577
 /drone1/waypoint_node, 0.0, 10, 0.08410192050757317
 /rosout, 0.0, 5, 0.0315843421853536

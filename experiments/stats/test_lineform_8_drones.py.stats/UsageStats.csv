@@ -1,3 +1,4 @@
+node,cpu_percent,num_threads,mem_percent
 /drone5/waypoint_node, 0.0, 10, 0.08443399887167151
 /drone4/waypoint_node, 0.0, 10, 0.08394203092485915
 /drone3/waypoint_node, 0.0, 10, 0.08379444054081545
