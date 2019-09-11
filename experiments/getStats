@@ -1,7 +1,7 @@
 #!/bin/bash
 
 appName=$1
-appName_stats="${appName}.stats"
+appName_stats="stats/${appName}.stats"
 
 if [ -f $appName ]; then
     echo "User specified \"$appName\""
@@ -36,5 +36,5 @@ function finish
 trap finish EXIT
 
 echo "Press Ctrl-C to end user application and data collection"
-python3 $1
+timeout -s INT 120s python3 $1
 
