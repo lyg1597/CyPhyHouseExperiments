@@ -16,13 +16,13 @@ fi
 
 mkdir -p $appName_stats
 
-gz stats --plot > $appName_stats/RTStats.txt &
+gz stats --plot > $appName_stats/RTStats.csv &
 GZ_PID=$!
-python3 node_stats.py $appName_stats/UsageStats.txt &
+python3 node_stats.py $appName_stats/UsageStats.csv &
 nodeStat_PID=$!
 tshark -f "udp portrange 2000-2016" -Tfields -E header=y -E separator=, \
     -e frame.number -e frame.time_relative -e udp.dstport -e udp.length \
-    > $appName_stats/PacketStats.txt &
+    > $appName_stats/PacketStats.csv &
 tshark_PID=$!
 sleep 5s
 echo "Start Collecting Data!"
