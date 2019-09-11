@@ -1,41 +1,40 @@
 #!/bin/bash
 
+appName=$1
+appName_stats="${appName}.stats"
+
+if [ -f $appName ]; then
+    echo "User specified \"$appName\""
+else
+    echo "\"$appName\" is not found"
+    exit 1
+fi
+
+if [ -d $appName_stats ]; then
+    echo "\"$appName_stats\" already exists. Overwriting logs..."
+fi
+
+mkdir -p $appName_stats
+
+gz stats --plot > $appName_stats/RTStats.txt &
+GZ_PID=$!
+python3 node_stats.py $appName_stats/UsageStats.txt &
+nodeStat_PID=$!
+tshark -f "udp portrange 2000-2016" -Tfields -E header=y -E separator=, \
+    -e frame.number -e frame.time_relative -e udp.dstport -e udp.length \
+    > $appName_stats/PacketStats.txt &
+tshark_PID=$!
+sleep 5s
+echo "Start Collecting Data!"
+
 function finish
 {
   kill -9 $GZ_PID
   kill -9 $nodeStat_PID
   kill -9 $tshark_PID
-  kill -9 $ROS_PID
 }
-trap finish SIGINT SIGTERM
+trap finish EXIT
 
-launchPath=$HOME/catkin_ws3/src/Cymulator/cym_device/launch/
-launchFile=$1
-appName=$2
+echo "Press Ctrl-C to end user application and data collection"
+python3 $1
 
-if [ -f $launchPath$launchFile ]; then
-   echo $launchFile
-else
-  echo file not found
-  exit 1
-fi
-
-
-roslaunch cym_device $launchFile &>/dev/null &
-ROS_PID=$!
-sleep 5s
-echo Simulator Launched!
-
-echo Collecting Data!
-gz stats > $appName_stats/RTstats.txt &
-GZ_PID=$!
-python3 $appName_stats/nodeStats.py &
-nodeStat_PID=$!
-tshark -f "udp portrange 2000-2016" > $appName_stats/packetStats.txt &
-tshark_PID=$!
-
-sleep 3s
-echo Ctrl-C to end data collection.
-
-
-wait
