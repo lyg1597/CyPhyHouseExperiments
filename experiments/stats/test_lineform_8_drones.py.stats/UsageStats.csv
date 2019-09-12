@@ -1,4 +1,4 @@
-node, cpu_percent, num_threads, mem_percent
+node,cpu_percent,num_threads,mem_percent
 /drone7/robot_state_publisher, 0.0, 6, 0.04426481601444221
 /drone3/robot_state_publisher, 0.0, 6, 0.04674925414584463
 /drone6/ground_truth_to_tf, 0.0, 5, 0.0348559290316558

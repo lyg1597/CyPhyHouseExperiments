@@ -1,4 +1,4 @@
-node, cpu_percent, num_threads, mem_percent
+node,cpu_percent,num_threads,mem_percent
 /drone6/landing_action, 0.0, 8, 0.033392324389889025
 /drone3/ground_truth_to_tf, 0.0, 5, 0.035286400985116616
 /drone5/takeoff_action, 0.0, 8, 0.032654372469670484

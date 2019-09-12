@@ -1,4 +1,4 @@
-node, cpu_percent, num_threads, mem_percent
+node,cpu_percent,num_threads,mem_percent
 /vrpn_client_node, 0.0, 30, 0.0923177852193396
 /drone4/takeoff_action, 0.0, 8, 0.033416922787229644
 /drone11/estop_relay, 0.0, 5, 0.030895587059816293

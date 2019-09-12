@@ -1,4 +1,4 @@
-node, cpu_percent, num_threads, mem_percent
+node,cpu_percent,num_threads,mem_percent
 /drone1/estop_relay, 0.0, 5, 0.03052661109970702
 /drone5/estop_relay, 0.0, 5, 0.03126456301992556
 /drone5/ground_truth_to_tf, 0.0, 5, 0.03483133063431518

@@ -1,4 +1,4 @@
-node, cpu_percent, num_threads, mem_percent
+node,cpu_percent,num_threads,mem_percent
 /drone2/pose_action, 0.0, 7, 0.03307254522446099
 /drone0/landing_action, 0.0, 8, 0.0326789708670111
 /drone5/pose_action, 0.0, 7, 0.03333082839653748
