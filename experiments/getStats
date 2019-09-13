@@ -22,7 +22,8 @@ gz stats --plot > $appName_stats/RTStats.csv &
 GZ_PID=$!
 python3 node_stats.py $appName_stats/UsageStats.csv &
 nodeStat_PID=$!
-tshark -f "udp portrange 2000-2016" -Tfields -E header=y -E separator=, \
+tshark -o ip.defragment:FALSE -f "udp portrange 2000-2016" -Y udp \
+    -Tfields -E header=y -E separator=, \
     -e frame.number -e frame.time_relative -e udp.dstport -e udp.length \
     > $appName_stats/PacketStats.csv &
 tshark_PID=$!
@@ -38,5 +39,5 @@ function finish
 trap finish EXIT
 
 echo "Press Ctrl-C to end user application and data collection"
-timeout --foreground -s INT $TIMEOUT python3 $1
+timeout --foreground -s INT $TIMEOUT python3 $appName
 
