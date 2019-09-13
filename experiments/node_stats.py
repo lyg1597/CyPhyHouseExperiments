@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     testNode = NodeInfo()
     statFile = open(sys.argv[1], 'w')
-    header = ', '.join(["node","cpu_percent","num_threads","mem_percent"])
+    header = ','.join(["node","cpu_percent","num_threads","mem_percent"])
     statFile.write(header+'\n')
 
     while(True):
