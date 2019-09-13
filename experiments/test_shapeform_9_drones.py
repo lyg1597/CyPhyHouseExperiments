@@ -23,7 +23,7 @@ def run_app(app_class, agent_config, moat_config):
 
 def main():
     app_class = ShapeForm
-    leader = 2
+    leader = 0
     plist = list(range(2000, 2009))
 
     app_list = []

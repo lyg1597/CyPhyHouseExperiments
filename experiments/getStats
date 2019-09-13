@@ -27,7 +27,7 @@ tshark -o ip.defragment:FALSE -f "udp portrange 2000-2016" -Y udp \
     -e frame.number -e frame.time_relative -e udp.dstport -e udp.length \
     > $appName_stats/PacketStats.csv &
 tshark_PID=$!
-sleep 5s
+sleep 8s
 echo "Start Collecting Data!"
 
 function finish
