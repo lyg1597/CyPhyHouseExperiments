@@ -1,0 +1,8 @@
+- {bot_name: "device0", bot_type: "QUAD", init_pos: [-4, -2.5, 0.3]}
+- {bot_name: "device1", bot_type: "CAR",  init_pos: [ 8, 5, 0.3]}
+- {bot_name: "device2", bot_type: "QUAD", init_pos: [4,  -2.5, 0.3]}
+- {bot_name: "device3", bot_type: "CAR",  init_pos: [ 8,  -5, 0.3]}
+- {bot_name: "device4", bot_type: "QUAD", init_pos: [-4, 2.5, 0.3]}
+- {bot_name: "device5", bot_type: "CAR",  init_pos: [ -8,  -5, 0.3]}
+- {bot_name: "device6", bot_type: "QUAD", init_pos: [4,  2.5, 0.3]}
+- {bot_name: "device7", bot_type: "QUAD", init_pos: [0,  0, 0.3]}
