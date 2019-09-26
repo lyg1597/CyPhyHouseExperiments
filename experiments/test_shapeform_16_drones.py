@@ -31,7 +31,7 @@ def main():
         pid = port - 2000
         is_leader = (pid == leader)
         agent_config = AgentConfig(
-            pid, len(plist), "",
+            pid, len(plist), "127.255.255.255",
             rport=port, plist=plist, mh= BaseMutexHandler,
             is_leader=is_leader, mhargs=[is_leader, pid]
         )
