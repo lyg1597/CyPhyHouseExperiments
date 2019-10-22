@@ -8,11 +8,18 @@ from src.motion.moat_withlidar import MoatWithLidar as MoatTestCar
 
 
 import multiprocessing as mp
+import csv
 import yaml
 
 
-def run_app(app_class, agent_config, moat_config):
+def run_app(app_class, cym_config, agent_config, moat_config):
     app = app_class(agent_config, moat_config)
+    if app.agent_gvh.is_leader:
+        app.name = "stats_car_construct_map" + cym_config + ".csv"
+        with open(app.name, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=['iter', 'time', 'map'])
+            writer.writeheader()
+
     try:
         app.start()
         app.join()
@@ -60,7 +67,7 @@ def main(argv):
             mp.Process(
                 name=botname,
                 target=run_app,
-                args=(AppClass, agent_config, moat_config)
+                args=(AppClass, cfg_yml, agent_config, moat_config)
             )
         )
 
