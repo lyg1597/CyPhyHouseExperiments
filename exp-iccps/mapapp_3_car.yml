@@ -1,0 +1,4 @@
+- {bot_name: "car1", bot_type: "CAR", init_pos: [-8, -7, 0.3]}
+- {bot_name: "car2", bot_type: "CAR", init_pos: [0, 8, 0.3]}
+- {bot_name: "car3", bot_type: "CAR", init_pos: [8, -7, 0.3]}
+
