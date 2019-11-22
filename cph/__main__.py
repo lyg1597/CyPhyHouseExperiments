@@ -59,7 +59,7 @@ def simulate_main(app_py: str, conf: Konfig) -> None:
         # Generate a process object for each Agent
         device['ros_node_prefix'] = \
             device['bot_name'] + '/waypoint_node'  # FIXME Handle topic names uniformly
-        proc = mp.Process(target=middleware.run_app, args=(app_py, local_cfg))
+        proc = mp.Process(target=middleware.main, args=(app_py, local_cfg))
         agent_proc_list.append(proc)
 
     launch_gazebo = create_roslaunch_instance(device_info_list)
@@ -72,10 +72,13 @@ def simulate_main(app_py: str, conf: Konfig) -> None:
 
         launch_gazebo.spin()
     except KeyboardInterrupt:
-        print("User sent SIGINT. Sending SIGTERM to all agent processes...")
+        print("User sent SIGINT. Wait for all agent processes to stop.")
+        for agent in agent_proc_list:
+            agent.join(2.0)  # Wait a while for the agent to finish
     finally:
         for agent in agent_proc_list:
             if agent.is_alive():
+                print("Agent pid", agent.pid, "is still alive. Escalate to SIGTERM.")
                 agent.terminate()
                 agent.join()  # Wait for the agent to finish
         launch_gazebo.stop()

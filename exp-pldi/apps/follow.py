@@ -15,7 +15,7 @@ class BasicFollowApp(AgentThread):
         self.locals['trips'] = 0
 
     def loop_body(self):
-        if self.locals['i'] > 200:
+        if self.locals['i'] > 1:
             self.trystop()
             return
         self.locals['i'] += 1
